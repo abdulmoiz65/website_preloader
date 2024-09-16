@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Loader with Content Fade-In</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; 
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            background-color: #ffffff; 
+            transition: opacity 1s ease-in-out;
+        }
+
+        #preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            text-align: center;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .maju-logo {
+            /* height: 200px; */
+            /* width: 300px; */
+        }
+
+        .text-1, .text-2 {
+            position: absolute;
+            top: 50%; /* Align text vertically in the middle */
+            left: 50%; /* Align text horizontally in the middle */
+            transform: translate(-50%, -50%); /* Center the text */
+            font-weight: bolder;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .text-1 {
+            color: #112269;
+        }
+
+        .text-2 {
+            color: #d62c1f;
+        }
+
+        .text-1.active {
+            opacity: 1;
+        }
+
+        .text-1.fade-out {
+            opacity: 0;
+        }
+
+        .text-2.active {
+            opacity: 1;
+        }
+
+        section {
+            display: none;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 800px;
+            padding: 0 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        section.fade-in {
+            opacity: 1;
+        }
+
+        
+        @media (min-width: 768px) {
+            .text-1, .text-2 {
+                font-size: 3rem;
+            }
+
+            .maju-logo {
+                width: 120px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .text-1, .text-2 {
+                font-size: 4rem;
+            }
+
+            .maju-logo {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+    
+        <!-- <img src="./maju.png" class="maju-logo" alt="MAJU Logo"> -->
+        <div class="loader-text">
+            <span class="text-1">MUHAMMAD ALI JINNAH UNIVERSITY</span>
+            <span class="text-2">FINAL YEAR PROJECTS</span>
+        </div>
+    </div>
+    
+    <section>
+        <p>MY WEBSITE CONTENT</p>
+    </section>
+
+    <script>
+        window.addEventListener("load", function () {
+            const text1 = document.querySelector(".text-1");
+            const text2 = document.querySelector(".text-2");
+            const preloader = document.getElementById("preloader");
+            const content = document.querySelector("section");
+
+            text1.classList.add("active");
+
+            setTimeout(function () {
+                text1.classList.remove("active");
+                text1.classList.add("fade-out");
+
+                setTimeout(function () {
+                    text2.classList.add("active");
+                }, 1000);
+
+            }, 1500);
+
+            
+            setTimeout(function () {
+                preloader.classList.add("fade-out");
+                setTimeout(function () {
+                    preloader.style.display = "none";
+                    content.style.display = "block";
+                    content.classList.add("fade-in"); 
+                    document.body.style.overflow = "auto";
+                }, 1000); 
+            }, 4000);
+        });
+    </script>
+
+</body>
+</html>
